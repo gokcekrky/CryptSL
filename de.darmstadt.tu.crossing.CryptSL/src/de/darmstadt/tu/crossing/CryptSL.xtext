@@ -86,13 +86,22 @@ Constraint:
 	LogicalImplyExpression;
 
 LogicalImplyExpression returns Constraint:
-	LogicalOrExpression
+	LogicalEqualityExpression
 	({Constraint.leftExpression=current}
 	operator=LogicalImply
-	rightExpression=LogicalOrExpression)*;
+	rightExpression=LogicalEqualityExpression)*;
 
 LogicalImply:
 	IMPLIES="=>";
+	
+LogicalEqualityExpression returns Constraint:
+	LogicalOrExpression
+	({Constraint.leftExpression=current}
+	operator=LogicalEquality
+	rightExpression=LogicalOrExpression)*;
+
+LogicalEquality:
+	IMPLIES="<=>";
 
 LogicalOrExpression returns Constraint:
 	LogicalAndExpression
@@ -201,11 +210,20 @@ ComparingEQNEQOperator returns ComparingOperator:
 	EQUAL='==' | UNEQUAL='!=';
 
 Cons returns LiteralExpression:
-	cons=ArrayElements "in" "{" litsleft=LitList "}" | cons=LiteralExpression;
+	cons=ArrayElements "in" "{" litsleft=LitList "}"| cons=ConsPredExpression  | cons=LiteralExpression;
 
 ArrayElements:
-	el ="elements(" cons=ConsPred ")" | cons=ConsPred 
+	el ="elements(" lit=LiteralExpression")" | lit=LiteralExpression
 ;
+
+ConsPredExpression:
+	cons= ConsPredElements "in" "{" litsleft=LitList "}" | cons=ConsPredElements;
+	
+ConsPredElements:
+	cons="alg(" lit=LiteralExpression")" | cons= "mode(" lit=LiteralExpression ")" | cons= "pad(" lit=LiteralExpression ")"
+	| (part="part(" ind=IntegerLiteral "," split=StringLiteral "," lit=LiteralExpression ")")
+;
+
 
 ConsPred returns LiteralExpression:
 	(part="part(" ind=IntegerLiteral "," split=StringLiteral "," lit=LiteralExpression ")") | lit=LiteralExpression;
