@@ -217,7 +217,7 @@ ArrayElements:
 ;
 
 ConsPred returns LiteralExpression:
-	(sugar="alg("lit=LiteralExpression ")"| sugar="mode("lit=LiteralExpression ")" | sugar="pad("lit=LiteralExpression ")") | lit=LiteralExpression;
+	(sugar = "alg("lit=LiteralExpression ")"| sugar = "mode("lit=LiteralExpression ")" |sugar = "pad("lit=LiteralExpression ")") | lit=LiteralExpression;
 
 
 terminal INT:
