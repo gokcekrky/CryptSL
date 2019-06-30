@@ -210,23 +210,15 @@ ComparingEQNEQOperator returns ComparingOperator:
 	EQUAL='==' | UNEQUAL='!=';
 
 Cons returns LiteralExpression:
-	cons=ArrayElements "in" "{" litsleft=LitList "}"| cons=ConsPredExpression  | cons=LiteralExpression;
+	cons=ArrayElements "in" "{" litsleft=LitList "}" | cons=LiteralExpression;
 
 ArrayElements:
-	el ="elements(" lit=LiteralExpression")" | lit=LiteralExpression
+	el ="elements(" cons=ConsPred ")" | cons=ConsPred 
 ;
-
-ConsPredExpression:
-	cons= ConsPredElements "in" "{" litsleft=LitList "}" | cons=ConsPredElements;
-	
-ConsPredElements:
-	cons="alg(" lit=LiteralExpression")" | cons= "mode(" lit=LiteralExpression ")" | cons= "pad(" lit=LiteralExpression ")"
-	| (part="part(" ind=IntegerLiteral "," split=StringLiteral "," lit=LiteralExpression ")")
-;
-
 
 ConsPred returns LiteralExpression:
-	(part="part(" ind=IntegerLiteral "," split=StringLiteral "," lit=LiteralExpression ")") | lit=LiteralExpression;
+	(sugar="alg("lit=LiteralExpression ")"| sugar="mode("lit=LiteralExpression ")" | sugar="pad("lit=LiteralExpression ")") | lit=LiteralExpression;
+
 
 terminal INT:
 	'0'..'9' ('0'..'9' | '_')*;
