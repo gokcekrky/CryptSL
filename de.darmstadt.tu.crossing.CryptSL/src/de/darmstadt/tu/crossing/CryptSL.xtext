@@ -86,23 +86,14 @@ Constraint:
 	LogicalImplyExpression;
 
 LogicalImplyExpression returns Constraint:
-	LogicalEqualityExpression
+	LogicalOrExpression
 	({Constraint.leftExpression=current}
 	operator=LogicalImply
-	rightExpression=LogicalEqualityExpression)*;
+	rightExpression=LogicalOrExpression)*;
 
 LogicalImply:
 	IMPLIES="=>";
 	
-LogicalEqualityExpression returns Constraint:
-	LogicalOrExpression
-	({Constraint.leftExpression=current}
-	operator=LogicalEquality
-	rightExpression=LogicalOrExpression)*;
-
-LogicalEquality:
-	IMPLIES="<=>";
-
 LogicalOrExpression returns Constraint:
 	LogicalAndExpression
 	({Constraint.leftExpression=current}
