@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.darmstadt.tu.crossing.CrySL</groupId>
+		<artifactId>de.darmstadt.tu.crossing.CrySL.parent</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>de.darmstadt.tu.crossing.CrySL.parser</artifactId>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spdsVersion>2.4-SNAPSHOT</spdsVersion>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>de.fraunhofer.iem</groupId>
+			<artifactId>idealPDS</artifactId>
+			<version>${spdsVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase</artifactId>
+			<version>${xtextVersion}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.eclipse.emf/org.eclipse.emf.common -->
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>2.15.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.eclipse.emf/org.eclipse.emf.ecore -->
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>2.15.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.eclipse.xtext.common.types/ui -->
+		<dependency>
+			<groupId>org.eclipse.xtext.common.types</groupId>
+			<artifactId>ui</artifactId>
+			<version>2.4.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/ui-2.4.2.jar</systemPath>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.eclipse.jdt/core -->
+		<dependency>
+			<groupId>org.eclipse.jdt</groupId>
+			<artifactId>core</artifactId>
+			<version>3.3.0-v_771</version>
+		</dependency>
+		<dependency>
+			<groupId>de.darmstadt.tu.crossing.CrySL</groupId>
+			<artifactId>de.darmstadt.tu.crossing.CrySL</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>de.darmstadt.tu.crossing.CrySL</groupId>
+			<artifactId>de.darmstadt.tu.crossing.CrySL.ide</artifactId>
+			<version>2.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>soot-snapshot</id>
+			<name>Soot snapshot repository</name>
+			<url>https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-snapshot/</url>
+			<layout>default</layout>
+		</snapshotRepository>
+		<repository>
+			<uniqueVersion>true</uniqueVersion>
+			<id>soot-release</id>
+			<name>Soot release repository</name>
+			<url>https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-release/</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>soot-snapshot</id>
+			<name>soot snapshots</name>
+			<url>https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-snapshot/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>soot-release</id>
+			<name>soot release</name>
+			<url>https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-release/</url>
+		</repository>
+	</repositories>
+</project>
