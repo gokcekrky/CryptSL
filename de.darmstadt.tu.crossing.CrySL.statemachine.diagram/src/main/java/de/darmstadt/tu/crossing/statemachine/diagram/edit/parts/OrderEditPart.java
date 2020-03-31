@@ -39,6 +39,7 @@ public class OrderEditPart extends DiagramEditPart {
 	/**
 	 * @generated
 	 */
+	//never called inside this project, maybe in the background
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
