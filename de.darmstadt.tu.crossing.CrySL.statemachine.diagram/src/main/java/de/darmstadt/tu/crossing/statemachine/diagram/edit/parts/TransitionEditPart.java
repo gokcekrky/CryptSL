@@ -38,6 +38,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements ITreeB
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new TransitionItemSemanticEditPolicy());
+		System.out.println("huht");
 	}
 
 	/**
@@ -103,6 +104,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart implements ITreeB
 		 * @generated
 		 */
 		public TransitionConnection() {
+			//works, can be modified
 			this.setLineWidth(1);
 
 			setTargetDecoration(createTargetDecoration());

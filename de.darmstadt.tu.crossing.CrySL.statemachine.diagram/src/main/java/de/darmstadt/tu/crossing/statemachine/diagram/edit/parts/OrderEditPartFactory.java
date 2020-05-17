@@ -16,16 +16,22 @@ public class OrderEditPartFactory implements EditPartFactory {
 	/**
 	 * @generated
 	 */
+	//this gets called, but by whom? recursively
 	public EditPart createEditPart(EditPart context, Object model) {
 		if (model instanceof View) {
+			//ist das ein Problem?
 			View view = (View) model;
 			switch (StatemachineVisualIDRegistry.getVisualID(view)) {
 
+			//wenn hiervon eins nicht komiliert, dann keine Visualisierung möglich
 			case OrderEditPart.VISUAL_ID:
 				OrderEditPart orderEditPart = new OrderEditPart(view);
 				return orderEditPart;
 
 			case StateEditPart.VISUAL_ID:
+				// heißt das, dass OrderEdtPart das Layout vorgibt als Parent?
+				// also z.B. XY Layout in OrderEditPart probieren
+				// da hier kein Layout, gilt das der Kinder nicht, sondern default?
 				OrderEditPart parentEditPart = new OrderEditPart(view.getDiagram());
 				return new StateEditPart(view, parentEditPart.childcount);
 

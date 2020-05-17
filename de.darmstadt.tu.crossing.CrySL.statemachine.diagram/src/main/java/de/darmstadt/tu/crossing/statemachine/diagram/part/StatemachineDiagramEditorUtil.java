@@ -1,5 +1,6 @@
 package de.darmstadt.tu.crossing.statemachine.diagram.part;
 
+import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -44,6 +45,7 @@ import org.eclipse.gmf.tooling.runtime.part.DefaultDiagramEditorUtil;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -124,9 +126,24 @@ public class StatemachineDiagramEditorUtil {
 			wizardDialogSettings = pluginDialogSettings.addNewSection(settingsKey);
 		}
 		wizard.setDialogSettings(wizardDialogSettings);
+		//new, but no change yet!
+		// not called initially! No more layout tryings!
+		//System.out.println("run wizard in StatemachineDiagramEditorUtil");
+		GridLayout gridLayout = new GridLayout();
+		gridLayout.numColumns = 3;
+		gridLayout.verticalSpacing = 2;
+		//try to set grid datathis 
+		//gridData.horizontal
+		gridLayout.marginLeft = 9;
+		shell.setLayout(gridLayout);
+		
 		WizardDialog dialog = new WizardDialog(shell, wizard);
 		dialog.create();
+		//int maxSize = Math.max(500, dialog.getShell().getSize().x);
 		dialog.getShell().setSize(Math.max(500, dialog.getShell().getSize().x), 500);
+		//dialog.getShell().setSize(maxSize, 500);
+		//new, but not yet working
+		//dialog.getShell().setLayout(new BorderLayout().CENTER);
 		dialog.open();
 	}
 
@@ -185,6 +202,7 @@ public class StatemachineDiagramEditorUtil {
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				Order model = createInitialModel();
+				//System.out.println("beginning?");
 				attachModelToResource(model, modelResource);
 
 				Diagram diagram = ViewService.createDiagram(model, OrderEditPart.MODEL_ID,

@@ -62,6 +62,10 @@ public class StateCreateCommand extends EditElementCommand {
 		newElement.setRight(owner.getLeft());
 		owner.setLeft(newElement);
 		owner.setRight(newElement);
+		
+		//new
+		// not called initially! 
+		//System.out.println("method in StateCreateCommand");
 
 		doConfigure(newElement, monitor, info);
 		((CreateElementRequest) getRequest()).setNewElement(newElement);

@@ -75,6 +75,8 @@ public class StatemachineDiagramEditorPlugin extends AbstractUIPlugin {
 	 * @generated
 	 */
 	public StatemachineDiagramEditorPlugin() {
+		//new
+		System.out.println("constructor of StatemachineDiagramEditorPlugin");
 	}
 
 	/**
@@ -86,6 +88,8 @@ public class StatemachineDiagramEditorPlugin extends AbstractUIPlugin {
 		myLogHelper = new LogHelper(this);
 		PreferencesHint.registerPreferenceStore(DIAGRAM_PREFERENCES_HINT, getPreferenceStore());
 		adapterFactory = createAdapterFactory();
+		//new
+		System.out.println("start method in editorPlugin");
 	}
 
 	/**

@@ -141,6 +141,7 @@ public class StatemachineTextSelectionEditPolicy extends SelectionEditPolicy imp
 	/**
 	 * @generated
 	 */
+	//not called initially
 	protected IFigure createFocusFeedbackFigure() {
 		return new Figure() {
 

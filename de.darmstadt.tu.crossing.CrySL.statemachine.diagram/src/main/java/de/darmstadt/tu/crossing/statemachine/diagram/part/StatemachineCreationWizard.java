@@ -94,6 +94,8 @@ public class StatemachineCreationWizard extends Wizard implements INewWizard {
 		setDefaultPageImageDescriptor(
 				StatemachineDiagramEditorPlugin.getBundledImageDescriptor("icons/wizban/NewStatemachineWizard.gif")); //$NON-NLS-1$
 		setNeedsProgressMonitor(true);
+		//new, not called initially
+		//System.out.println("init method in StatemachineCreationWizard");
 	}
 
 	/**

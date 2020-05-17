@@ -2,8 +2,12 @@ package de.darmstadt.tu.crossing.statemachine.diagram.edit.parts;
 
 import java.util.List;
 
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FlowLayout;
+import org.eclipse.draw2d.FreeformLayer;
+import org.eclipse.draw2d.FreeformLayout;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
@@ -25,6 +29,8 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
@@ -60,7 +66,7 @@ public class StateEditPart extends ShapeNodeEditPart {
 	public StateEditPart(View view, int siblingCount) {
 		super(view);
 		this.siblingCount = siblingCount;
-
+		System.out.println("huhs");
 	}
 
 	/**
@@ -177,7 +183,8 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected NodeFigure createNodePlate() {
-		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(40, 40);
+		//this works
+		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(80, 40);
 		return result;
 	}
 
@@ -189,9 +196,17 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 * 
 	 * @generated
 	 */
+	// this method is called for each state node
+	// probably not called directly, at least createFigure called by GEF in the process of building the view when it is needed
 	protected NodeFigure createNodeFigure() {
 		NodeFigure figure = createNodePlate();
 		figure.setLayoutManager(new StackLayout());
+		//figure.setLayoutManager(new ConstrainedToolbarLayout());//no difference
+		System.out.println("How often is that called?");
+		//figure.setLayoutManager(new FlowLayout());
+		//figure.setLayoutManager(new FillLayout()); //Figure hat nur ne Methode setLayoutManager
+		//figure.setLayoutManager(new FreeformLayout()); //states gone, transitions still overlapping
+		//figure.setLayoutManager(new GridLayout(1, true));
 		IFigure shape = createNodeShape();
 		figure.add(shape);
 		contentPane = setupContentPane(shape);
@@ -208,9 +223,16 @@ public class StateEditPart extends ShapeNodeEditPart {
 	protected IFigure setupContentPane(IFigure nodeShape) {
 		if (nodeShape.getLayoutManager() == null) {
 			ConstrainedToolbarLayout layout = new ConstrainedToolbarLayout();
+			//FreeformLayout layout = new FreeformLayout();
 			layout.setSpacing(5);
 			nodeShape.setLayoutManager(layout);
+			//new, not called once, ah maybe because layoutmanager is not null!
+			System.out.println("LayoutManager counter");
 		}
+		//new, yip, so why is that? so LayoutManager is StackLayout
+		// which one is better Stack or ConstrainedToolbarLayout? not seeing a difference
+		//the layout manager is flow layout
+		System.out.println("LayoutManager counter 2 " + nodeShape.getLayoutManager());
 		return nodeShape; // use nodeShape itself as contentPane
 	}
 
@@ -282,11 +304,14 @@ public class StateEditPart extends ShapeNodeEditPart {
 		 */
 		public StateFigure() {
 
-			FlowLayout layoutThis = new FlowLayout();
+			FlowLayout layoutThis = new FlowLayout();//default centered alignment
 			layoutThis.setStretchMinorAxis(false);
-			layoutThis.setMinorAlignment(FlowLayout.ALIGN_LEFTTOP);
+			//layoutThis.setMinorAlignment(FlowLayout.ALIGN_LEFTTOP);
+			//layoutThis.setMinorAlignment(FlowLayout.ALIGN_TOPLEFT);
 
-			layoutThis.setMajorAlignment(FlowLayout.ALIGN_LEFTTOP);
+			//layoutThis.setMajorAlignment(FlowLayout.ALIGN_LEFTTOP);
+			//layoutThis.setMajorAlignment(FlowLayout.ALIGN_TOPLEFT);
+			//both spacings modified no change nor set horizontal
 			layoutThis.setMajorSpacing(5);
 			layoutThis.setMinorSpacing(5);
 			layoutThis.setHorizontal(true);
@@ -295,8 +320,17 @@ public class StateEditPart extends ShapeNodeEditPart {
 
 			this.setForegroundColor(THIS_FORE);
 			this.setBackgroundColor(THIS_BACK);
-			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(40), getMapMode().DPtoLP(40)));
+			//modifiable, but with 400 looks terrible, but positioning same, 2-2-1-1, why?
+			//size gilt nur für individuellen Node, nicht äußeres! 
+			//this.setPreferredSize(new Dimension(getMapMode().DPtoLP(40), getMapMode().DPtoLP(40)));
+			//this.setPreferredSize(200, 200);
 			createContents();
+			
+			//new, für jeden State gecalled
+			System.out.println("StateFigure constructor called");
+			//null, so icon in WrappingLabel is not the small rectangle
+			//WrappingLable only refers to label, so rectangle separate from that
+			System.out.println(this.getFigureStateNameFigure().getIcon());
 		}
 
 		/**
@@ -331,7 +365,8 @@ public class StateEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	static final Color THIS_BACK = new Color(null, 240, 240, 240);
+	//static final Color THIS_BACK = new Color(null, 240, 240, 240);
+	static final Color THIS_BACK = new Color(null, 135, 206, 250);
 
 	/**
 	 * @generated

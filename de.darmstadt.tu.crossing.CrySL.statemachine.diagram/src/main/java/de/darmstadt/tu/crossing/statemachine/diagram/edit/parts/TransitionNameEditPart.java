@@ -102,6 +102,7 @@ public class TransitionNameEditPart extends LabelEditPart implements ITextAwareE
 	 */
 	public TransitionNameEditPart(View view) {
 		super(view);
+		System.out.println("huhtn");
 	}
 
 	/**
@@ -126,6 +127,8 @@ public class TransitionNameEditPart extends LabelEditPart implements ITextAwareE
 	 */
 	public int getKeyPoint() {
 		return ConnectionLocator.MIDDLE;
+		//return ConnectionLocator.SOURCE;//works, maybe make it dynamic
+		//possible to react on overlap?
 	}
 
 	/**
@@ -532,6 +535,8 @@ public class TransitionNameEditPart extends LabelEditPart implements ITextAwareE
 		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
 			Integer c = (Integer) event.getNewValue();
 			setFontColor(DiagramColorRegistry.getInstance().getColor(c));
+			//not changed
+			//setFontColor(new Color(null, 170, 0, 250));
 		} else if (NotationPackage.eINSTANCE.getFontStyle_Underline().equals(feature)) {
 			refreshUnderline();
 		} else if (NotationPackage.eINSTANCE.getFontStyle_StrikeThrough().equals(feature)) {

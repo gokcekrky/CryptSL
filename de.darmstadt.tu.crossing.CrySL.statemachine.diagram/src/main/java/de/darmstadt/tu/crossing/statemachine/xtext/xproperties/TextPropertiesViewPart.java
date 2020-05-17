@@ -159,7 +159,7 @@ public class TextPropertiesViewPart extends ViewPart {
   
   protected Font getFont() {
     Display _display = this.getViewSite().getShell().getDisplay();
-    final Font font = new Font(_display, "Courier", 14, 0);
+    final Font font = new Font(_display, "Courier", 14, 0); //does not change font of transition names
     this.swtResources.add(font);
     return font;
   }

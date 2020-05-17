@@ -67,19 +67,25 @@ public class StatemachineDiagramEditor extends DiagramDocumentEditor implements 
 	 */
 	public StatemachineDiagramEditor() {
 		super(true);
+		//new
+		// called at the very beginning
+		System.out.println("constructor of StatemachineDiagramEditor");
 		FrameworkAdapters.addAdapter(new FrameworkAdapters.IAdapter() {
 			@Override
 			public boolean appliesTo(Object element) {
+				System.out.println("applies to");
 				return element instanceof IGraphicalEditPart && getModel(element) instanceof Expression;
 			}
 
 			@Override
 			public EObject getModel(Object element) {
+				System.out.println("get model");
 				return ((IGraphicalEditPart) element).getNotationView().getElement();
 			}
 
 			@Override
 			public TransactionalEditingDomain getEditingDomain(Object element) {
+				System.out.println("get editing domain");
 				return ((IGraphicalEditPart) element).getEditingDomain();
 			}
 		});
@@ -187,7 +193,7 @@ public class StatemachineDiagramEditor extends DiagramDocumentEditor implements 
 	 * @generated
 	 */
 	protected void performSaveAs(IProgressMonitor progressMonitor) {
-		Shell shell = getSite().getShell();
+		Shell shell = getSite().getShell(); 
 		IEditorInput input = getEditorInput();
 		SaveAsDialog dialog = new SaveAsDialog(shell);
 		IFile original = input instanceof IFileEditorInput ? ((IFileEditorInput) input).getFile() : null;

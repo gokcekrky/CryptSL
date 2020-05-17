@@ -90,6 +90,7 @@ public class StateNameEditPart extends CompartmentEditPart implements
 	 */
 	public StateNameEditPart(View view) {
 		super(view);
+		System.out.println("huhsn");
 	}
 
 	/**
